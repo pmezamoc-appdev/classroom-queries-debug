@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
   def index
     matching_departments = Department.all
 
-    @list_of_departments = matching_departments.order({ :created_at => :desc })
+    @list_of_departments = matching_departments.all.order({ :created_at => :desc })
 
     render({ :template => "departments/index.html.erb" })
   end
@@ -10,7 +10,7 @@ class DepartmentsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
 
-    matching_departments = Department.where({ :id => the_id })
+    matching_departments = Department.where({ :id => the_id }).first
 
     @the_department = matching_departments
 
